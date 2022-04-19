@@ -1,0 +1,40 @@
+﻿
+1. Asp .Net Web Application (.Net Framework) projesi açılır.
+2. Models => Entities klasörü açılır.
+3. Models => Entities => Projede ihtiyaç duyulan varlıklar oluşturulur.
+4. DataAccess klasörü açılır.
+5. DataAccess => AppDbContext.cs sınıfı açılır.
+6. EntityFramework yüklenir.
+7. Migration yapılır.
+8. Repositories klasörü açılır.
+9. Repositories => IBaseRepository.cs arayüzü açılır.
+10. Repositories => EntityTypeRepositories klasörü açılır. 
+11. Views => Shared klasörü açılır. Buradaki mantık tüm projedeki her bir entity için yapacağımız CRUD operasyonları için hazrılayacağımız View page'lerin besleneceği yani onların atası maiyetinde olacak bir ata html sayfasını burada oluşturacağız. BU html sayfasının adı LayoutPage'dir. LayoutPage dışında proje View anlamında ortak kullanılacak herşeyi burada saklayacağız.
+12. Views => Shared => _LayoutPage.cshtml açılır.
+	12.1. _LayoutPage.cshtml sayfası için AdminLTE template'tinden fixed-sidebar.html sayfasının tüm html kodlarını kopyalayarak, _LayoutPage.cshtml içerisine yapıştırdık. İhtiyaçlara göre template içerisindeki başka hazır layout sayfalarıda kullanılabilinirdi.
+	12.2. _LayoutPage.cshtml sayfasının optimum düzeyde düzgün çalışabilmesi için gerekli olan Css ve Js kaynak kodlarını projemize taşıdık. Bu kaynak kodları AdminLTE içerisinden projemizde açacağımız "Content" klasöründe düzenli olarak depolayacağız. Burada önemli olan tüm CSS ve JS'lerin alınmamasıdır. Şayet ne olacak hepsini _LayoutPage.cshtml basıp geçelim düşüncesine kapılmayın. Yukarıda dediğim gibi optimum çalışması için gerekli olan kaynak kodları kullanacağız. Bunun nedeni sayfanın hızlı bir şekilde açılması için yapılmasıdır.
+	12.3. Content klasörü açılır.
+	12.4. Content => css, js, fonts klasörleri açılır. _LayoutPage.cshtml optimum şeklilde düzenli çalışması için gerekli olan css ve js kaynak kodları eklenir.
+	12.5. RenderBody() tasarımsal olarak ihtyaç duyulan yere eklenir. Yani layoutpage içerisinde nereyi render etmek istiyorsam onu belirtiyorum.
+13. Controllers => CategoryController.cs açılır.
+14. Category varlığı için Create operasyonu yürütülürken Controller ve View arasında data transferi yapmak için bir DTO nesnesi oluşturulur.
+	14.1. Models => DTO klasörü açılır.
+	14.2. Modes => DTO => CategoryCreateDTO.cs sınıfı açılır.
+15. Create operasyonunu yürütmek için 2 tane Action Methoda ihtiyaç var. Bunlar birincisi category ekleme sayfasını bize getirecek 2. ise kullanıcının gitdiği yeni category'i veri tabanına gönderecek action method'tur. Methodların başında bulunan [HttpGet] ve [HttpPost] attribute'ları bunun için kullanılır. Şayet bu attribute'lar ile action method'lar işaretlenmez ise "The current request for action 'Add' on controller type 'CategoryController' is ambiguous between the following action methods" hatasını yeriz.
+16. List operasyonu için MVC deseni gereği bir View Model'e ihtiyaç duyulur. Bunun için
+	16.1. Models => VMs klasörü açılır.
+	16.2. Models => VMs => CategoryVm.cs sınıfı açılır. VM'ler yapılacak işe göre dizayn edilirler. Biz bu projede bu CategoryVm'mi category'leri genel olarak listelemek için kullandık ve bu bağlamda ihtiyaçlarıma göre VM içerisine property'lerimi tanımladım.
+	16.3. CategoryController içerisine List() action methodu oluşturulur.
+	16.4. Controller => CategoryController => List() methoduna sağ tıklayarak "List.cshtml" view'ı eklenir.
+	16.5. Controller => CategoryController => Details() methodu açılır. BU method ile birlikte kullanılmak için CategoryDetailsVM.cs sınıfı Models => VMs klasörünün altına açılır.
+	16.6. Controller => CategoryController => Update() medhodu açılır. Update işlemleri için CategoryUpdateDTO.cs sınıfı Models => DTO klasörünün altına açılır.
+	16.7. Controller => CategoryController => Delete() methodu yazılır.
+17. Shared => Partial klasörü açılır. Projemizde statik yani sabit olarak kalan HTML içeriklerimizi partial view'lara alarak yani böl parçala yönet mantığında partial view'lara dağıtarak daha yönetilebilir LayoutPage'ler yada HTML içerikleri elde edeceğiz.
+18. Form Messages işlemleri
+	18.1. Models => Helpers klasörü açılır.
+	18.2. Models => Helpers => FormMessages.cs sınıfı açılır. Form işlemlerinde verilecek mesajlar oluşturulur.
+	18.3. Views => Shared => Partial => _FormMessages.cshtml partial view açılır.
+	18.4. Form messages business logic mantığına göre Controller içerisinde ViewBag'lere 1 yani başarılı yada 2 yani başarısız değerleri gönderirilir.
+	18.5. Add, Update vb view page'ler içerisinde "_FormMessages.cshmtl" HTML helper aracılığıyla çağrılır.
+	18.6. Form Messages'lar alert içerisinde göstetilmektedir. Bu alert'lerin dinamik olarak kaldırılması için _LayoutPage.cshtml sayfasınında en alta script yazıldı.
+19. COntrollers => ProductController.cs açılır ve CRUD işlemleri yürütülür.

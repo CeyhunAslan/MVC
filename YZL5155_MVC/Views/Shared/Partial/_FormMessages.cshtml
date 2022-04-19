@@ -1,0 +1,19 @@
+﻿
+@using YZL5155_MVC.Models.Helpers;
+
+@if (ViewBag.Condition == 1)
+{
+    <div class="alert alert-success alert-dismissible">
+        <h5><i class="icon fa fa-exclamation"></i>Success..!</h5>
+        @FormMessages.success
+    </div>
+}
+else if (ViewBag.Condition == 2)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <h5><i class="icon fa fa-exclamation"></i>Failed..!</h5>
+        @FormMessages.failed
+    </div>
+}
+
+

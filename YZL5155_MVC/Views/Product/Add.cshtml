@@ -1,0 +1,51 @@
+﻿@model YZL5155_MVC.Models.DTO.CreateProductDTO
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.Partial("/Views/Shared/Partial/_FormMessages.cshtml")
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Create Product</h3>
+                </div>
+                <form method="post" action="/Product/Add">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" placeholder="Product Name" name="Name" />
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" class="form-control" placeholder="Description" name="Description" />
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="text" class="form-control" placeholder="Price" name="Price" />
+                        </div>
+                        <div class="form-group">
+                            <label>Stock</label>
+                            <input type="text" class="form-control" placeholder="Stock" name="Stock" />
+                        </div>
+                        <div class="form-group">
+                            <label>Choose Category</label>
+                            <select name="CategoryId" class="form-control">
+                                @foreach (var item in Model.Categories)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
